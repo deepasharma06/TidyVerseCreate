@@ -1,0 +1,103 @@
+---
+title: "Data607 Project 2C"
+author: "Deepa"
+date: "3/13/2022"
+output: html_document
+---
+
+
+
+## For this assignment, I will be using the dataset from kaggle for superhero TV shows
+
+Original link;https://www.kaggle.com/anoopkumarraut/superhero-tv-shows/data
+
+
+
+#### Import Library
+
+```{r}
+
+library(tidyverse)
+library(stringr)
+library(tidyr)
+
+```
+
+
+#### Load data from Github (csv) into R dataframe
+
+```{r}
+df<- read.csv("https://raw.githubusercontent.com/deepasharma06/Data-607/main/Dataset_Superhero-TV-Shows.csv")
+head(df)
+```
+
+### I will be focusing on two packages Tidyr and strigr
+
+## Using tidyr package to clean the data
+
+### using df function to remove the column
+
+```{r}
+library(tidyr)
+df<- df[, c("show_title", "imdb_rating", "release_year", "genre")]
+head(df)
+```
+
+
+#### The following code truncates the first 4 characters of release_year to get the year instead of a range.
+
+#### It uses the substr function in stringr package. 
+```{r}
+df$release_year <- substr(df$release_year,1,4)
+head(df)
+```
+
+
+#### This code is to replace any rows in imdb_rating column with a value of 'Not_Rated' with NA
+
+```{r}
+df$imdb_rating[df$imdb_rating == 'Not-Rated'] = NA
+head(df)
+```
+
+#### This code is to replace any rows in imdb_rating column with a value of Null with NA
+
+```{r}
+df$imdb_rating[df$imdb_rating == ''] = NA
+head(df)
+```
+
+#### This code is to replace any rows in release_year column with a value of 'TBA' with NA
+
+```{r}
+df$release_year[df$release_year == 'TBA'] = NA
+head(df)
+```
+
+#### This code is to replace all rows with NA
+### Using drop_na function from tidyr package
+
+```{r}
+df <- drop_na(df) 
+head(df)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
